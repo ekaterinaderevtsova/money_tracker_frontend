@@ -1,0 +1,34 @@
+@import "normalize.css/normalize.css";
+:root {
+    font-family: system-ui, sans-serif;
+    color: inherit;
+    background-color: transparent;
+    color-scheme: normal;
+}
+
+body {
+    font-family: arial;
+    height: 100vh;
+}
+
+h1 {
+    font-size: 2rem;
+    line-height: 1.2;
+}
+
+button {
+    border-radius: 0;
+    border: 1px solid;
+    padding: initial;
+    background-color: transparent;
+}
+
+@media (prefers-color-scheme: light) {
+    :root {
+        color: inherit;
+        background-color: transparent;
+    }
+    button {
+        background-color: transparent;
+    }
+}
