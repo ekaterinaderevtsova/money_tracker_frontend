@@ -1,4 +1,4 @@
-const API_BASE = "https://aac5-109-92-117-123.ngrok-free.app/spending";
+const API_BASE = "https://982f-109-92-117-123.ngrok-free.app/spending";
 
 export const SpendingService = {
   async addSpending(newSpending) {
