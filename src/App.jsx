@@ -101,6 +101,7 @@ function App() {
             </div>
           </form>
         </div>
+        <hr style={{ border: "0.5px solid #ccc" }} />
         <div className="container">
           <div className="weeks-container">
             <WeekArrow
@@ -108,7 +109,7 @@ function App() {
               size={12}
               onClick={handleLeftArrowClick}
             />
-            <h3>Week Spending</h3>
+            <h3>Week Spendings</h3>
             <WeekArrow
               icon={BiSolidRightArrow}
               size={12}
