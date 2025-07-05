@@ -1,4 +1,4 @@
-import React from "react";
+import PropTypes from "prop-types";
 import "./SpendingChart.css";
 
 const SpendingChart = ({ totalSpent }) => {
@@ -19,6 +19,10 @@ const SpendingChart = ({ totalSpent }) => {
       </div>
     </div>
   );
+};
+
+SpendingChart.propTypes = {
+  totalSpent: PropTypes.number.isRequired,
 };
 
 export default SpendingChart;

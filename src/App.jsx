@@ -1,11 +1,12 @@
 import "./App.css";
 import { useEffect, useState } from "react";
-import { SpendingService } from './service/spending';
+import { SpendingService } from "./service/spending";
 import { BiSolidLeftArrow, BiSolidRightArrow } from "react-icons/bi";
 import Button from "./components/Button/Button.jsx";
 import DateInput from "./components/DateInput/DateInput.jsx";
 import SumInput from "./components/SumInput/SumInput.jsx";
 import SpendingChart from "./components/SpendingChart/SpendingChart.jsx";
+import AverageChart from "./components/AverageChart/AverageChart.jsx";
 import SpendingList from "./components/SpendingList/SpendingList.jsx";
 import WeekArrow from "./components/WeekArrow/WeekArrow.jsx";
 
@@ -19,31 +20,35 @@ function App() {
   const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
   const [spending, setSpending] = useState([]);
   const [totalSpent, setTotalSpent] = useState(0);
-  const [displayedDate, setDisplayedDate] = useState(new Date().toISOString().split("T")[0]);
+  const [averageSpent, setAverageSpent] = useState(0);
+  const [displayedDate, setDisplayedDate] = useState(
+    new Date().toISOString().split("T")[0],
+  );
 
   const fetchSpendings = async (displayedDate) => {
     try {
       const data = await SpendingService.getSpendings(displayedDate);
       setSpending(data.daySpendings);
       setTotalSpent(data.total);
+      setAverageSpent(data.average);
     } catch (error) {
       console.error("Error fetching spendings:", error);
     }
   };
 
   useEffect(() => {
-    fetchSpendings(displayedDate); 
-  }, [displayedDate]); 
+    fetchSpendings(displayedDate);
+  }, [displayedDate]);
 
   const handleLeftArrowClick = () => {
     const newDate = new Date(displayedDate);
-    newDate.setDate(newDate.getDate() - 7); 
+    newDate.setDate(newDate.getDate() - 7);
     setDisplayedDate(newDate.toISOString().split("T")[0]);
   };
 
   const handleRightArrowClick = () => {
     const newDate = new Date(displayedDate);
-    newDate.setDate(newDate.getDate() + 7); 
+    newDate.setDate(newDate.getDate() + 7);
     setDisplayedDate(newDate.toISOString().split("T")[0]);
   };
 
@@ -59,12 +64,6 @@ function App() {
     e.preventDefault();
     if (!sum || sum <= 0) return;
 
-    const newSpending = {
-      day: date,
-      sum: Number(sum),
-    };
-    console.log(newSpending);
-
     try {
       await SpendingService.addSpending({
         day: date,
@@ -73,9 +72,10 @@ function App() {
 
       const data = await SpendingService.getSpendings(displayedDate);
       setSpending(data.daySpendings);
-      setTotalSpent(data.total); 
+      setTotalSpent(data.total);
+      setAverageSpent(data.average);
     } catch (error) {
-      console.error('Operation failed:', error);
+      console.error("Operation failed:", error);
     }
   };
 
@@ -103,15 +103,29 @@ function App() {
         </div>
         <div className="container">
           <div className="weeks-container">
-            <WeekArrow icon={BiSolidLeftArrow} size={12} onClick={handleLeftArrowClick} />
-            <h3>Week Spending</h3> 
-            <WeekArrow icon={BiSolidRightArrow} size={12} onClick={handleRightArrowClick} />
+            <WeekArrow
+              icon={BiSolidLeftArrow}
+              size={12}
+              onClick={handleLeftArrowClick}
+            />
+            <h3>Week Spending</h3>
+            <WeekArrow
+              icon={BiSolidRightArrow}
+              size={12}
+              onClick={handleRightArrowClick}
+            />
           </div>
-          <div> 
+          <div style={{ marginBottom: "5px" }}>
+            <h4>Total Spend</h4>
             <SpendingChart totalSpent={totalSpent} />
           </div>
+          <div style={{ marginBottom: "5px" }}>
+            <h4>Average per Day</h4>
+            <AverageChart averageSpent={averageSpent} />
+          </div>
+
           <div>
-            <SpendingList spending={spending}/>
+            <SpendingList spending={spending} />
           </div>
         </div>
       </main>
