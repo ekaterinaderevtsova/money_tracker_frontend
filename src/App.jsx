@@ -116,11 +116,11 @@ function App() {
             />
           </div>
           <div style={{ marginBottom: "5px" }}>
-            <h4>Total Spend</h4>
+            <h4 style={{ marginBottom: "2px" }}>Total Spend</h4>
             <SpendingChart totalSpent={totalSpent} />
           </div>
           <div style={{ marginBottom: "5px" }}>
-            <h4>Average per Day</h4>
+            <h4 style={{ marginBottom: "2px" }}>Average per Day</h4>
             <AverageChart averageSpent={averageSpent} />
           </div>
 
