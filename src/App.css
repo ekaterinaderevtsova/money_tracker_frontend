@@ -40,6 +40,7 @@
     flex-direction: column;
     gap: 8px;
     border-radius: 8px;
+    min-width: 350px;
 }
 .weeks-container {
     display: flex;
