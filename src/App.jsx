@@ -139,11 +139,11 @@ function App() {
               onClick={handleRightArrowClick}
             />
           </div>
-          <div style={{ marginBottom: "5px" }}>
+          <div>
             <h4 style={{ marginBottom: "2px" }}>Total Spend</h4>
             <SpendingChart totalSpent={totalSpent} />
           </div>
-          <div style={{ marginBottom: "5px" }}>
+          <div>
             <h4 style={{ marginBottom: "2px" }}>Average per Day</h4>
             <AverageChart averageSpent={averageSpent} />
           </div>

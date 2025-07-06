@@ -38,7 +38,7 @@
 .container {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 14px;
     border-radius: 8px;
     min-width: 350px;
 }

@@ -1,19 +1,19 @@
 .chart-labels {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 8px;
     font-size: 14px;
     color: #666;
-  }
-  
-  .chart-bar {
-    height: 20px;
+}
+
+.chart-bar {
+    margin-top: 5px;
+    height: 18px;
     background-color: rgba(205, 207, 228, 0.35);
     border-radius: 10px;
     overflow: hidden;
-  }
-  
-  .chart-progress {
+}
+
+.chart-progress {
     height: 100%;
     transition: all 0.3s ease;
-  }
+}
