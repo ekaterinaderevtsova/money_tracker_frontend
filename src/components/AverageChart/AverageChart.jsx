@@ -1,5 +1,5 @@
-import React from "react";
 import "../SpendingChart/SpendingChart.css";
+import PropTypes from "prop-types";
 
 const AverageChart = ({ averageSpent }) => {
   const LIMIT = 2500;
@@ -20,6 +20,10 @@ const AverageChart = ({ averageSpent }) => {
       </div>
     </div>
   );
+};
+
+AverageChart.propTypes = {
+  averageSpent: PropTypes.number.isRequired,
 };
 
 export default AverageChart;

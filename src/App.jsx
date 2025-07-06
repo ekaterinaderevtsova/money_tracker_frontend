@@ -1,7 +1,12 @@
 import "./App.css";
 import { useEffect, useState } from "react";
 import { SpendingService } from "./service/spending";
-import { BiSolidLeftArrow, BiSolidRightArrow } from "react-icons/bi";
+import {
+  BiSolidLeftArrow,
+  BiSolidRightArrow,
+  BiChevronDown,
+  BiChevronUp,
+} from "react-icons/bi";
 import Button from "./components/Button/Button.jsx";
 import DateInput from "./components/DateInput/DateInput.jsx";
 import SumInput from "./components/SumInput/SumInput.jsx";
@@ -24,6 +29,7 @@ function App() {
   const [displayedDate, setDisplayedDate] = useState(
     new Date().toISOString().split("T")[0],
   );
+  const [isFormOpen, setIsFormOpen] = useState(false);
 
   const fetchSpendings = async (displayedDate) => {
     try {
@@ -74,9 +80,17 @@ function App() {
       setSpending(data.daySpendings);
       setTotalSpent(data.total);
       setAverageSpent(data.average);
+
+      // Reset form and close it after successful submission
+      setSum("");
+      setIsFormOpen(false);
     } catch (error) {
       console.error("Operation failed:", error);
     }
+  };
+
+  const toggleForm = () => {
+    setIsFormOpen(!isFormOpen);
   };
 
   return (
@@ -88,18 +102,27 @@ function App() {
       </div>
       <main className="main-container">
         <div className="container">
-          <h3>Add a new spending</h3>
-          <form className="new-spending-form" onSubmit={handleSubmit}>
-            <div>
-              <SumInput sum={sum} handleChange={handleSumChange} />
-            </div>
-            <div>
-              <DateInput date={date} handleClick={handleDateChange} />
-            </div>
-            <div>
-              <Button title="Add" onClick={handleSubmit} />
-            </div>
-          </form>
+          <div className="toggle-header" onClick={toggleForm}>
+            <h3>Add a new spending</h3>
+            {isFormOpen ? (
+              <BiChevronUp size={20} />
+            ) : (
+              <BiChevronDown size={20} />
+            )}
+          </div>
+          {isFormOpen && (
+            <form className="new-spending-form" onSubmit={handleSubmit}>
+              <div>
+                <SumInput sum={sum} handleChange={handleSumChange} />
+              </div>
+              <div>
+                <DateInput date={date} handleClick={handleDateChange} />
+              </div>
+              <div>
+                <Button title="Add" onClick={handleSubmit} />
+              </div>
+            </form>
+          )}
         </div>
         <hr style={{ border: "0.5px solid #ccc" }} />
         <div className="container">

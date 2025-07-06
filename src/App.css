@@ -1,15 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;600&family=Lato:wght@400;700&family=Nunito:wght@400;700&family=Playfair+Display:wght@400;700&family=Space+Grotesk:wght@400;700&display=swap");
-
 *,
 *::before,
 *::after {
     box-sizing: border-box;
 }
-
 * {
     margin: 0;
 }
-
 .tracker-page {
     background-color: white;
     font-family: "Nunito", sans-serif;
@@ -18,7 +15,6 @@
     flex-direction: column;
     align-items: center;
 }
-
 .header-container {
     display: flex;
     align-items: center;
@@ -28,31 +24,48 @@
     height: 55px;
     padding: 20px;
 }
-
 .main-container {
     display: flex;
     flex-direction: column;
     gap: 12px;
     padding: 15px;
 }
-
 .new-spending-form {
     display: flex;
     flex-direction: row;
     gap: 5px;
 }
-
 .container {
     display: flex;
     flex-direction: column;
     gap: 8px;
     border-radius: 8px;
 }
-
 .weeks-container {
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: 10px;
     justify-content: center;
+}
+
+/* Toggle header styles */
+.toggle-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 6px;
+    transition: background-color 0.2s ease;
+}
+
+.toggle-header:hover {
+    background-color: #f5f5f5;
+}
+
+.toggle-header h3 {
+    margin: 0;
+    user-select: none;
 }
