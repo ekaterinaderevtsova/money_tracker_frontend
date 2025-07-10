@@ -1,4 +1,5 @@
-const API_BASE = "https://d7ff-109-92-117-123.ngrok-free.app/spending";
+// const API_BASE = " https://29ed8a2f8c7e.ngrok-free.app/spending";
+const API_BASE = "https://moneytracker-production-9f46.up.railway.app/spending";
 
 export const SpendingService = {
   async addSpending(newSpending) {

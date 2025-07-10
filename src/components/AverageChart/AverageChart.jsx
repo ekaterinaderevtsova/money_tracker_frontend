@@ -2,7 +2,7 @@ import "../SpendingChart/SpendingChart.css";
 import PropTypes from "prop-types";
 
 const AverageChart = ({ averageSpent }) => {
-  const LIMIT = 2500;
+  const LIMIT = 2600;
   return (
     <div>
       <div className="chart-labels">
