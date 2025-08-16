@@ -24,6 +24,15 @@
     height: 55px;
     padding: 20px;
 }
+
+/* Updated header to include logout button */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
 .main-container {
     display: flex;
     flex-direction: column;
@@ -49,7 +58,6 @@
     gap: 10px;
     justify-content: center;
 }
-
 /* Toggle header styles */
 .toggle-header {
     display: flex;
@@ -61,12 +69,41 @@
     border-radius: 6px;
     transition: background-color 0.2s ease;
 }
-
 .toggle-header:hover {
     background-color: #f5f5f5;
 }
-
 .toggle-header h3 {
     margin: 0;
     user-select: none;
+}
+
+/* Login form input focus styles */
+input:focus {
+    outline: none;
+    border-color: #434d9a !important;
+    box-shadow: 0 0 0 2px rgba(67, 77, 154, 0.25);
+}
+
+/* Responsive design for mobile */
+@media (max-width: 768px) {
+    .header {
+        padding: 0;
+    }
+
+    .header h2 {
+        font-size: 1.3rem;
+    }
+
+    .header button {
+        font-size: 0.9rem !important;
+    }
+
+    .container {
+        min-width: 300px;
+    }
+
+    .new-spending-form {
+        flex-direction: column;
+        gap: 10px;
+    }
 }

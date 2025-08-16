@@ -1,36 +1,50 @@
-// const API_BASE = " https://29ed8a2f8c7e.ngrok-free.app/spending";
-const API_BASE = "https://moneytracker-production-9f46.up.railway.app/spending";
+import { authService } from "./auth.js";
 
-export const SpendingService = {
-  async addSpending(newSpending) {
-    const response = await fetch(`${API_BASE}/spendings`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "ngrok-skip-browser-warning": "true",
-      },
-      body: JSON.stringify(newSpending),
-    });
-    if (!response.ok) throw new Error("Failed to add spending");
-    return await response.json();
-  },
+class SpendingServiceClass {
+  constructor() {
+    this.baseURL = "https://vocabvaultapp.duckdns.org/money-tracker/expenses"; // Update with your backend URL
+  }
 
   async getSpendings(date) {
-    const url = `${API_BASE}/spendings?date=${date}`;
     try {
-      const response = await fetch(url, {
-        headers: {
-          Accept: "application/json",
-          "ngrok-skip-browser-warning": "true",
+      const response = await authService.authenticatedRequest(
+        `${this.baseURL}/weekly?date=${date}`,
+        {
+          method: "GET",
         },
-      });
-      const text = await response.text(); // читаем текст, даже если ошибка
-      console.log("Raw response:", text);
-      if (!response.ok) throw new Error("Failed to fetch spendings");
-      return JSON.parse(text); // вручную парсим
-    } catch (err) {
-      console.error("Fetch error:", err);
-      throw err;
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch spendings");
+      }
+
+      return await response.json();
+    } catch (error) {
+      console.error("Error fetching spendings:", error);
+      throw error;
     }
-  },
-};
+  }
+
+  async addSpending(spendingData) {
+    try {
+      const response = await authService.authenticatedRequest(
+        `${this.baseURL}`,
+        {
+          method: "POST",
+          body: JSON.stringify(spendingData),
+        },
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to add spending");
+      }
+
+      return await response.json();
+    } catch (error) {
+      console.error("Error adding spending:", error);
+      throw error;
+    }
+  }
+}
+
+export const SpendingService = new SpendingServiceClass();
